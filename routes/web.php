@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/category/{post}/rate', [RatingController::class, 'store'])->name('ratings.store');
     Route::post('/category/{post}/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store');
     Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
+    Route::put('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
 
 
     

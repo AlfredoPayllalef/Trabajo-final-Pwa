@@ -15,9 +15,12 @@
                     <p class="text-justify text-gray-800 leading-relaxed text-lg">{{ $post->content }}</p>
                     <div class="flex justify-between mt-6 text-sm text-blue-600">
                         <a href="{{ url('/home') }}" class="hover:underline">← Volver al inicio</a>
-                        <a href="{{ route('category.delete', $post->id) }}">Borrar post</a>
-                        <a href="{{ route('category.edit', $post->id) }}" class="hover:underline">Editar post</a>
-                    </div>
+                        @auth
+                            @if (Auth::id() === $post->user_id)
+                                <a href="{{ route('category.edit', $post->id) }}" class="hover:underline">Editar post</a>
+                            @endif
+                        @endauth
+                        </div>
                 </div>
             </div>
         </div>

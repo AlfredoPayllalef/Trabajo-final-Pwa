@@ -22,6 +22,11 @@
                     <li><a href="{{ route('misPosts') }}">Mis Posts</a></li>
                     <li><a href="{{ url('/category/create') }}" class="hover:text-blue-300">Nuevo post</a></li>
                     <li>
+                        <a href="{{ route('profile.edit') }}" class="hover:text-blue-300">
+                            {{ Auth::user()->name }}
+                        </a>
+                    </li>
+                    <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="hover:text-red-400">Cerrar sesión</button>

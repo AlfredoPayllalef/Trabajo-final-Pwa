@@ -30,9 +30,7 @@
     </section>
 
     {{-- Posts recientes --}}
-    <div class="bg-red-200 p-4 mb-4">
-    CANTIDAD DE POSTS: {{ $posts->count() }}
-    </div>
+    
     @if(isset($posts) && $posts->count())
         <section>
             <h2 class="text-2xl font-semibold mb-6 text-center">Posts recientes</h2>
@@ -55,7 +53,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             Swal.fire({
                 icon: 'success',
-                title: '¡Bienvenido!',
+                title: 'Éxito',
                 text: '{{ session("success") }}',
                 confirmButtonText: 'Aceptar'
             });

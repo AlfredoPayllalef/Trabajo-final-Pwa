@@ -57,8 +57,10 @@ class CategoryController extends Controller
    
     public function edit($id)
     {
-        $post = Post::findOrFail($id); 
-        return view('category.edit', compact('post'));
+        $post = Post::findOrFail($id);
+        $categories = Category::all(); 
+
+        return view('category.edit', compact('post', 'categories'));
     }
 
 
@@ -95,7 +97,31 @@ class CategoryController extends Controller
         ->with('success', 'Post creado con éxito');
     }
     
+    public function update(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
 
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'poster' => 'nullable|image|max:2048',
+        ]);
+
+        $post->title = $validated['title'];
+        $post->content = $validated['content'];
+        $post->category_id = $validated['category_id'];
+        $post->habilitated = $request->has('habilitated');
+
+        if ($request->hasFile('poster')) {
+            $path = $request->file('poster')->store('posters', 'public');
+            $post->poster = $path;
+        }
+
+        $post->save();
+
+        return redirect()->route('home')->with('success', 'El post fue actualizado correctamente.');
+    }
     
     
 }
