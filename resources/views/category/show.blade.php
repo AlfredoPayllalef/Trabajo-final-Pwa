@@ -65,21 +65,25 @@
                 @csrf
                 <label class="block text-xs text-gray-600 font-medium mb-1">Tu calificación:</label>
 
-                <div class="flex flex-row-reverse justify-center space-x-reverse space-x-0.5">
+                <div class="flex justify-center space-x-1">
                     @foreach(range(1, 5) as $i)
-                        <input type="radio" name="score" value="{{ $i }}" id="star{{ $i }}" class="hidden peer" required>
+                        <input type="radio" name="score" value="{{ $i }}" id="star{{ $i }}"
+                            class="hidden peer peer/star{{ $i }}" required>
+
                         <label for="star{{ $i }}"
-                            class="text-2xl cursor-pointer text-gray-300 peer-checked:text-yellow-400 hover:text-yellow-300 transition">
+                            class="text-2xl cursor-pointer text-gray-300 hover:text-yellow-300 peer-checked/star{{ $i }}:text-yellow-400">
                             ★
                         </label>
                     @endforeach
                 </div>
+
 
                 <button type="submit"
                     class="mt-2 bg-blue-500 text-white px-3 py-1 text-sm rounded hover:bg-blue-600">
                     Calificar
                 </button>
             </form>
+
         @else
             <p class="text-xs text-gray-400 italic mt-2">Iniciá sesión para calificar</p>
         @endauth
